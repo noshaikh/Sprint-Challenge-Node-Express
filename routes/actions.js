@@ -11,7 +11,7 @@ router.get("/:id", (req, res) => {
       res
         .status(404)
         .json({
-          message: "The project with the specified action does not exist."
+          message: "The project/action does not exist."
         })
 
         .catch(err => {
@@ -48,7 +48,7 @@ router.put("/:id", (req, res) => {
     if (!count) {
       res
         .status(404)
-        .json({ message: "The user with the specified ID does not exist." });
+        .json({ message: "The action with the specified ID does not exist." });
     } else if (action.text) {
       try {
         db.update(id, action);
@@ -56,11 +56,11 @@ router.put("/:id", (req, res) => {
       } catch (err) {
         res
           .status(500)
-          .json({ message: "The post information could not be modified" });
+          .json({ message: "The action information could not be modified" });
       }
     } else {
       res.status(400).json({
-        errorMessage: "Please provide text for the post."
+        errorMessage: "Please provide text for the action."
       });
     }
   });
@@ -75,7 +75,9 @@ router.delete("/:id", (req, res) => {
       } else {
         res
           .status(404)
-          .json({ message: "The post with the specified ID does not exist" });
+          .json({
+            message: "The action/project with the specified ID does not exist"
+          });
       }
     })
     .catch(err => res.status(500).json(err));
